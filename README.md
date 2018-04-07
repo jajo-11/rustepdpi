@@ -12,11 +12,9 @@ be easily adaptable to other e-Paper displays.
 
 ### Building
 
-Building should be as easy as running 'cargo build' in the project root.
-Or you can build and run the project directly with 'cargo run'.
-
-
+Building should be as easy as running `cargo build` in the project root.
+Or you can build and run the project directly with `cargo run`.
 
 [1]: https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT_(B)
 [2]: https://www.rust-lang.org 
-[3]: www.airspayce.com/mikem/bcm2835
+[3]: http://www.airspayce.com/mikem/bcm2835
