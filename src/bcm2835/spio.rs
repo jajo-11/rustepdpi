@@ -47,9 +47,9 @@ pub fn begin() -> Result<(), (&'static str, i32)> {
     if result == 1 {
         return Ok(());
     } else if result == 0 {
-        return Err(("failed to initalize spi! Are you root?", 0));
+        return Err(("failed to initialize spi! Are you root?", 0));
     }
-    Err(("Initializing spi failed with unknowen code", result))
+    Err(("Initializing spi failed with unknown code", result))
 }
 
 pub fn end() {
@@ -60,7 +60,7 @@ pub fn transfer(value: u8) -> u8 {
     unsafe { super::bcm2835_spi_transfer(value as uint8_t) }
 }
 
-pub fn set_bitorder(order: BitOrder) {
+pub fn set_bit_order(order: BitOrder) {
     unsafe { super::bcm2835_spi_setBitOrder(order as uint8_t) };
 }
 
@@ -76,6 +76,6 @@ pub fn chip_select(cs_pins: ChipSelect) {
     unsafe { super::bcm2835_spi_chipSelect(cs_pins as uint8_t) };
 }
 
-pub fn set_chip_selct_polarity(cs_pin: ChipSelect, level: super::PinLevel) {
+pub fn set_chip_select_polarity(cs_pin: ChipSelect, level: super::PinLevel) {
     unsafe { super::bcm2835_spi_setChipSelectPolarity(cs_pin as uint8_t, level.as_uint8_t()) };
 }

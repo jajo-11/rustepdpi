@@ -7,14 +7,14 @@ pub mod spio;
 
 #[link(name = "bcm2835")]
 extern "C" {
-    fn bcm2835_init() -> c_int; // returns 1 if succesful 0 if not
-    fn bcm2835_delay(delaytime: c_uint);
+    fn bcm2835_init() -> c_int; // returns 1 if successful 0 if not
+    fn bcm2835_delay(delay_time: c_uint);
 
     fn bcm2835_gpio_write(pin: uint8_t, value: uint8_t);
     fn bcm2835_gpio_lev(pin: uint8_t) -> uint8_t;
     fn bcm2835_gpio_fsel(pin: uint8_t, mode: uint8_t);
 
-    fn bcm2835_spi_begin() -> c_int; // returns 1 if succesful 0 if not call spi_end later
+    fn bcm2835_spi_begin() -> c_int; // returns 1 if successful 0 if not call spi_end later
     fn bcm2835_spi_end();
     fn bcm2835_spi_transfer(value: uint8_t) -> uint8_t; //currently no need for the return value
     fn bcm2835_spi_setBitOrder(order: uint8_t);

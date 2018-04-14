@@ -83,26 +83,26 @@ fn brush(color: Color) -> Box<Fn(usize, &mut super::Frame, u8) -> ()> {
 }
 
 pub fn draw_rect(mut frame: &mut super::Frame, point: Point, width: isize, height: isize, color: Color) {
-    //temporary: as i eventually want to allow negative width and hight but that requiers mor logic
-    let point_in_momory = point.get_mem_loc().unwrap();
+    //temporary: as i eventually want to allow negative width and height but that requires mor logic
+    let point_in_memory = point.get_mem_loc().unwrap();
 
     let width = cmp::min(width, super::WIDTH as isize - point.x);
     let height = cmp::min(height, super::HEIGHT as isize - point.y);
     let write = brush(color);
-    let mask_start = 0xFF >> point_in_momory.bit;
+    let mask_start = 0xFF >> point_in_memory.bit;
     let mut mask_end = !(0xFF >> (point.x + width) % 8);
     mask_end = match mask_end { 0x0 => 0xFF, _ => mask_end };
     let height = height as usize;
-    if (width + point_in_momory.bit as isize) < 9 {
+    if (width + point_in_memory.bit as isize) < 9 {
         let mask_start = mask_start & mask_end;
         for i in 0..height {
-            write(point_in_momory.byte + i * super::WIDTH as usize / 8, &mut frame, mask_start);
+            write(point_in_memory.byte + i * super::WIDTH as usize / 8, &mut frame, mask_start);
         }
     } else {
-        let width = width - (8 - point_in_momory.bit as isize);
+        let width = width - (8 - point_in_memory.bit as isize);
         let width_range = (width / 8) as usize + match width % 8 {0 => 0, _ => 1};
         for i in 0..height {
-            let current_address = point_in_momory.byte + i * super::WIDTH as usize / 8;
+            let current_address = point_in_memory.byte + i * super::WIDTH as usize / 8;
             write(current_address, &mut frame, mask_start);
             for j in 1..width_range {
                 write(current_address + j, &mut frame, 0xFF);

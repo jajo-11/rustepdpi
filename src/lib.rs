@@ -1,5 +1,3 @@
-use std::process::Command;
-use std::error::Error;
 use std::io;
 
 pub mod bcm2835;

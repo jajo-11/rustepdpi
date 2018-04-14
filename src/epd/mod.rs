@@ -70,7 +70,7 @@ pub enum Command {
     VcomAndDataIntervalSetting,
     LowPowerDetection,
     TconSetting,
-    ReselutionSetting,
+    ResolutionSetting,
     GetStatus,
     AutoMeasureVcom,
     ReadVcomValue,
@@ -112,7 +112,7 @@ impl Command {
             Command::VcomAndDataIntervalSetting => 0x50,
             Command::LowPowerDetection => 0x51,
             Command::TconSetting => 0x60,
-            Command::ReselutionSetting => 0x61,
+            Command::ResolutionSetting => 0x61,
             Command::GetStatus => 0x71,
             Command::AutoMeasureVcom => 0x80,
             Command::ReadVcomValue => 0x81,
@@ -137,11 +137,11 @@ pub fn epd_init() {
     if let Some(err) = begin().err() {
         panic!(format!("{} {}", err.0, err.1));
     }
-    set_bitorder(BitOrder::MSBFirst);
+    set_bit_order(BitOrder::MSBFirst);
     set_data_mode(Mode::Mode0);
     set_clock_divider(ClockDivider::Divider128);
     chip_select(ChipSelect::CS0);
-    set_chip_selct_polarity(ChipSelect::CS0, PinLevel::LOW);
+    set_chip_select_polarity(ChipSelect::CS0, PinLevel::LOW);
 
     reset();
     send_command(Command::BoosterSoftStart);
@@ -154,7 +154,7 @@ pub fn epd_init() {
     send_data(0x8f);
     send_command(Command::VcomAndDataIntervalSetting);
     send_data(0x37);
-    send_command(Command::ReselutionSetting);
+    send_command(Command::ResolutionSetting);
     send_data(WIDTH as u8);
     send_data(0x00);
     send_data(HEIGHT as u8);
